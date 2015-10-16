@@ -14,11 +14,18 @@
     "RAILS_SERVE_STATIC_FILES": {
       "required": true
     },
+    "NEW_RELIC_APP_NAME": {
+      "description": "Name used for newrelic",
+      "value": "HackerAssessor (autodeployed)"
+    },
     "SECRET_KEY_BASE": {
       "generator": "secret"
     }
   },
   "addons": [
-    "heroku-postgresql"
+    "heroku-postgresql",
+    "papertrail:choklad",
+    "rollbar:free",
+    "newrelic:wayne"
   ]
 }
