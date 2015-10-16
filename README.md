@@ -28,7 +28,7 @@ How to run it
 
 First install the dependencies
 
-    bundle install --without development,test
+    bundle install --without production
 
 Setup the database
 
