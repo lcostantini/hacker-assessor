@@ -22,4 +22,12 @@ class BulkCareerImporterTest < ActiveSupport::TestCase
     assert_equal 6, built_requirements.size
   end
 
+  test 'bulk upload with a missing skill will change nothing' do
+    BulkCareerImporter.new('ruby', <<-CSV.strip_heredoc)
+       tdd,0,1,2,3,3,4,5,5,5,5
+       invalid,0,1,2,3,3,4,5,5,5,5
+       CSV
+    assert_equal 1, careers(:ruby).requirements.size
+  end
+
 end
