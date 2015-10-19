@@ -1,12 +1,18 @@
 require 'csv'
+require 'forwardable'
 
 class BulkCareerImporter
 
   include ActiveRecord::Validations
+  extend Forwardable
 
-  def initialize name, requirements
+  attr_accessor :career
+  def_delegators :career, :to_model, :to_param, :to_key, :name, :description
+
+  def initialize name, requirements, description=nil
     Career.transaction do
-      @career = Career.find_or_create_by! name: name.underscore
+      self.career = Career.find_or_create_by! name: name.underscore
+      career.description = description if description
       CSV.parse(requirements) do |skill, *requirements_for_skill|
         build_requirements find_skill(skill), requirements_for_skill
       end
@@ -23,12 +29,12 @@ class BulkCareerImporter
   end
 
   def build_requirements skill, requirements
-    @career.requirements.where(skill: skill).destroy_all
+    career.requirements.where(skill: skill).destroy_all
     requirements.zip(Seniority::NAMES)
       .chunk{ |v, s| v.to_i }
       .map do |exp, seniorities|
         seniority = Seniority::NAMES.index seniorities.first.last
-        @career.requirements.create! seniority: seniority,
+        career.requirements.create! seniority: seniority,
                                      level: exp,
                                      skill: skill
     end

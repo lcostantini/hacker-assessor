@@ -1,4 +1,5 @@
 require 'panorama'
+require 'bulk_career_importer'
 
 class CareersController < ApplicationController
   before_action :set_career, only: [:show, :edit, :update, :destroy, :panorama]
@@ -23,8 +24,9 @@ class CareersController < ApplicationController
   end
 
   def create
-    @career = Career.new(career_params)
-    @career.save
+    @career = BulkCareerImporter.new career_params[:name],
+                                     career_params[:requirements],
+                                     career_params[:description]
     respond_with(@career)
   end
 
@@ -49,6 +51,6 @@ class CareersController < ApplicationController
     end
 
     def career_params
-      params.require(:career).permit(:name, :description)
+      params.require(:career).permit(:name, :description, :requirements)
     end
 end

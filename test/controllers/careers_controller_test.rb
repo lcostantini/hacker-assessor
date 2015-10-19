@@ -19,9 +19,12 @@ class CareersControllerTest < ActionController::TestCase
   test "should create career" do
     assert_difference('Career.count') do
       post :create, career: { name: 'dev-ops',
-                              description: 'Like a sysadmin that write code' }
+                              description: 'Like a sysadmin that write code',
+                              requirements: fixture_file_upload('files/dev-ops.csv') }
     end
 
+    requirements = Career.find_by(name: 'dev_ops').requirements
+    refute requirements.empty?
     assert_redirected_to career_path(assigns(:career))
   end
 
