@@ -18,7 +18,8 @@ class BulkCareerImporterTest < ActiveSupport::TestCase
     BulkCareerImporter.new('ruby', <<-CSV.strip_heredoc)
        tdd,0,1,2,3,3,4,5,5,5,5
        CSV
-    built_requirements = careers(:ruby).requirements.where(skill: skills(:tdd))
+    built_requirements = careers(:ruby).requirements
+      .where(skill: skills(:tdd))
     assert_equal 6, built_requirements.size
   end
 
@@ -28,6 +29,16 @@ class BulkCareerImporterTest < ActiveSupport::TestCase
        invalid,0,1,2,3,3,4,5,5,5,5
        CSV
     assert_equal 1, careers(:ruby).requirements.size
+  end
+
+  test 'bulk upload with a missing skill have errors' do
+    bulk = BulkCareerImporter.new('ruby', <<-CSV.strip_heredoc)
+       tdd,0,1,2,3,3,4,5,5,5,5
+       scrumming,0,1,2,3,3,4,5,5,5,5
+       CSV
+    assert_equal 1, careers(:ruby).requirements.size
+    assert_includes bulk.errors.full_messages,
+      'Requirements includes non existing skill "scrumming"'
   end
 
 end
