@@ -22,7 +22,7 @@ class BulkCareerImporter
   private
 
   def find_skill skill_name
-    Skill.find_by! name: skill_name
+    Skill.find_by! 'lower(name) = ?', skill_name.downcase
   rescue ActiveRecord::RecordNotFound
     errors.add :requirements, "includes non existing skill \"#{ skill_name }\""
     raise ActiveRecord::Rollback, 'invalid skill'
