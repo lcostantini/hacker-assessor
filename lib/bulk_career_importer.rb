@@ -31,7 +31,7 @@ class BulkCareerImporter
   def build_requirements skill, requirements
     career.requirements.destroy_all
     requirements.zip(Seniority::NAMES)
-      .chunk{ |v, s| v.to_i }
+      .chunk{ |v, s| v.to_i unless v.nil? }
       .map do |exp, seniorities|
         seniority = Seniority::NAMES.index seniorities.first.last
         career.requirements.create! seniority: seniority,

@@ -41,4 +41,12 @@ class BulkCareerImporterTest < ActiveSupport::TestCase
       'Requirements includes non existing skill "scrumming"'
   end
 
+  test 'bulk upload with requirements with nils' do
+    BulkCareerImporter.new('ruby', <<-CSV.strip_heredoc)
+       tdd,,,,1,,3,,,,
+       CSV
+    assert_equal 2, careers(:ruby).requirements.size
+    assert_equal 3, careers(:ruby).requirements.order(:level).first[:seniority]
+  end
+
 end
