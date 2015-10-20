@@ -16,12 +16,17 @@ class CareersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create career" do
+  test "should create career with all the requirements from the csv" do
     assert_difference('Career.count') do
-      post :create, career: { name: 'dev-ops',
-                              description: 'Like a sysadmin that write code' }
+      post :create, career: {
+        name: 'dev-ops',
+        description: 'Like a sysadmin that write code',
+        requirements: fixture_file_upload('files/dev-ops.csv')
+      }
     end
 
+    requirements = Career.find_by(name: 'dev_ops').requirements
+    refute requirements.empty?
     assert_redirected_to career_path(assigns(:career))
   end
 
@@ -35,9 +40,14 @@ class CareersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should update career" do
-    patch :update, id: @career, career: { description: @career.description, name: @career.name }
+  test "should update career requirements" do
+    patch :update, id: @career, career: {
+      name: @career.name,
+      description: @career.description,
+      requirements: fixture_file_upload('files/dev-ops.csv')
+    }
     assert_redirected_to career_path(assigns(:career))
+    assert_equal 4, @career.requirements(true).size
   end
 
   test "should destroy career" do

@@ -4,6 +4,8 @@ class Career < ActiveRecord::Base
   has_many :hackers
   has_many :requirements
 
+  validates :name, presence: true, uniqueness: true
+
   def get_seniority acquirements
     missing_requirements(acquirements).map(&:seniority).min.previous
   end
