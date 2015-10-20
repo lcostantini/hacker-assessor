@@ -16,11 +16,13 @@ class CareersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create career" do
+  test "should create career with all the requirements from the csv" do
     assert_difference('Career.count') do
-      post :create, career: { name: 'dev-ops',
-                              description: 'Like a sysadmin that write code',
-                              requirements: fixture_file_upload('files/dev-ops.csv') }
+      post :create, career: {
+        name: 'dev-ops',
+        description: 'Like a sysadmin that write code',
+        requirements: fixture_file_upload('files/dev-ops.csv')
+      }
     end
 
     requirements = Career.find_by(name: 'dev_ops').requirements

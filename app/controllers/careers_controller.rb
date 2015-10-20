@@ -25,7 +25,7 @@ class CareersController < ApplicationController
 
   def create
     @career = BulkCareerImporter.new career_params[:name],
-                                     career_params[:requirements].tempfile,
+                                     career_params[:requirements].try(:tempfile),
                                      career_params[:description]
     respond_with(@career)
   end
