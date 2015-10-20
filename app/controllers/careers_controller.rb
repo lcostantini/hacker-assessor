@@ -31,7 +31,9 @@ class CareersController < ApplicationController
   end
 
   def update
-    @career.update(career_params)
+    @career = BulkCareerImporter.new career_params[:name],
+                                     career_params[:requirements].try(:tempfile),
+                                     career_params[:description]
     respond_with(@career)
   end
 

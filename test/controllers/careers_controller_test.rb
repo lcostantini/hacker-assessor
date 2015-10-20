@@ -40,9 +40,14 @@ class CareersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should update career" do
-    patch :update, id: @career, career: { description: @career.description, name: @career.name }
+  test "should update career requirements" do
+    patch :update, id: @career, career: {
+      name: @career.name,
+      description: @career.description,
+      requirements: fixture_file_upload('files/dev-ops.csv')
+    }
     assert_redirected_to career_path(assigns(:career))
+    assert_equal 4, @career.requirements(true).size
   end
 
   test "should destroy career" do

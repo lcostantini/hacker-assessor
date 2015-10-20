@@ -29,7 +29,7 @@ class BulkCareerImporter
   end
 
   def build_requirements skill, requirements
-    career.requirements.where(skill: skill).destroy_all
+    career.requirements.destroy_all
     requirements.zip(Seniority::NAMES)
       .chunk{ |v, s| v.to_i }
       .map do |exp, seniorities|
