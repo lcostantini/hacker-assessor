@@ -29,6 +29,15 @@ class BulkCareerImporter
     raise ActiveRecord::Rollback, 'invalid skill'
   end
 
+  # skill is an Skill object that already exists in the DB.
+  # requirements is an array that represents the level for each Seniority.
+  # i.e.
+  # requirements = ["2", "2", "2", "2", "3", "3", "3", "3", "3", "3"]
+  # The index of the requirements match with the index of the array
+  # in Seniority::NAMES because the index of the requirements match
+  # with the columns in the csv.
+  # Then the number in the requirements match with a level for each skill
+  # and each seniority.
   def build_requirements skill, requirements
     requirements.zip(Seniority::NAMES)
       .chunk{ |v, s| v.to_i unless v.nil? }
