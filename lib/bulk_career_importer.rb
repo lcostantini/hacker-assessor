@@ -13,6 +13,7 @@ class BulkCareerImporter
     Career.transaction do
       build_career name
       career.description = description if description
+      career.requirements.destroy_all
       CSV.parse(requirements) do |skill, *requirements_for_skill|
         build_requirements find_skill(skill), requirements_for_skill
       end
@@ -29,7 +30,6 @@ class BulkCareerImporter
   end
 
   def build_requirements skill, requirements
-    career.requirements.destroy_all
     requirements.zip(Seniority::NAMES)
       .chunk{ |v, s| v.to_i unless v.nil? }
       .map do |exp, seniorities|

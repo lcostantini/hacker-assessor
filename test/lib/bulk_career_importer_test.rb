@@ -16,11 +16,13 @@ class BulkCareerImporterTest < ActiveSupport::TestCase
 
   test 'adds the given requirements to the career' do
     BulkCareerImporter.new('ruby', <<-CSV.strip_heredoc)
-       tdd,0,1,2,3,3,4,5,5,5,5
+       tdd,0,0,0,0,0,0,5,5,5,5
+       javascript,,,1,1,1,1,1,1,1,1
        CSV
     built_requirements = careers(:ruby).requirements
-      .where(skill: skills(:tdd))
-    assert_equal 6, built_requirements.size
+    assert_equal 3, built_requirements.size
+    assert_equal 2, built_requirements.where(skill: skills(:tdd)).size
+    assert_equal 1, built_requirements.where(skill: skills(:javascript)).size
   end
 
   test 'bulk upload with a missing skill will change nothing' do
