@@ -1,5 +1,4 @@
 require 'test_helper'
-require 'bulk_career_importer'
 
 class BulkCareerImporterTest < ActiveSupport::TestCase
 

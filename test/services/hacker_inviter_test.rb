@@ -1,5 +1,4 @@
 require 'test_helper'
-require 'hacker_inviter'
 
 class HackerInviterTest < ActiveSupport::TestCase
   test "add acquirements when a hacker is invted" do

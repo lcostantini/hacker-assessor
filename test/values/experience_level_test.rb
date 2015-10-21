@@ -1,5 +1,4 @@
 require 'test_helper'
-require 'experience_level'
 
 class ExperienceLevelTest < ActiveSupport::TestCase
 

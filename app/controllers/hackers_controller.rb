@@ -1,5 +1,3 @@
-require 'hacker_inviter'
-
 class HackersController < ApplicationController
   before_action :set_hacker, only: [:show, :edit, :update, :destroy]
 
