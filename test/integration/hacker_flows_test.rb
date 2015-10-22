@@ -2,8 +2,13 @@ require 'test_helper'
 
 class HackerFlowsTest < ActionDispatch::IntegrationTest
 
-  test "login" do
+  test "login and display missign skills" do
     login :jorge
+    assert has_content? "missing skills"
+    within 'li' do
+      assert has_content? 'tdd'
+      assert has_content? 'Required level: played'
+    end
   end
 
   def login hacker
