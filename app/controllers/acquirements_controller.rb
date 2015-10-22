@@ -15,8 +15,12 @@ class AcquirementsController < ApplicationController
   end
 
   def create
-    @acquirement = acquirements.create acquirement_params
-    respond_with(@acquirement, location: new_acquirement_path)
+    skill = acquirement_params.delete(:skill_id)
+    @acquirement = acquirements.find_or_initialize_by skill_id: skill
+    @acquirement.update acquirement_params
+    respond_with(@acquirement,
+                 notice: "Now you know #{ @acquirement.skill.name }",
+                 location: root_path)
   end
 
   def update
