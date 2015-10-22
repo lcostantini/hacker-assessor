@@ -23,8 +23,6 @@ class AcquirementsControllerTest < ActionController::TestCase
     assert_difference('Acquirement.count') do
       post :create, acquirement: { level: 2, skill_id: Skill.create(name: 'jQuery') }
     end
-
-    assert_redirected_to new_acquirement_path
   end
 
   test "should get edit" do

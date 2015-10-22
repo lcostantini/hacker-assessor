@@ -5,4 +5,8 @@
   <% if acquirement %>
     <p>Your level: <%= acquirement.level %></p>
   <% end %>
+  <%= button_to 'claim', acquirements_path(acquirement: {
+    hacker_id: current_hacker.id,
+    skill_id: requirement.skill.id,
+    level: requirement.level.to_i }) %>
 </li>
