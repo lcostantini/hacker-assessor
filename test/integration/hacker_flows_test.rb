@@ -7,12 +7,11 @@ class HackerFlowsTest < ActionDispatch::IntegrationTest
   end
 
   def login hacker
-    get root_path
-    post_via_redirect login_path,
-      email: hackers(hacker).email,
-      password: hackers(hacker).name
-    assert_response :success
-    assert_equal "Successfully logged in", flash[:notice]
+    visit root_path
+    fill_in :email, with: hackers(hacker).email
+    fill_in :password, with: hackers(hacker).name
+    click_button 'Sign in'
+    assert page.has_content? "Successfully logged in"
   end
 
 end
