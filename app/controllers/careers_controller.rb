@@ -1,6 +1,3 @@
-require 'panorama'
-require 'bulk_career_importer'
-
 class CareersController < ApplicationController
   before_action :set_career, only: [:show, :edit, :update, :destroy, :panorama]
 

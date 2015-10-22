@@ -1,0 +1,32 @@
+{
+  "app/services/*.rb": {
+    "command": "service",
+    "template": [
+      "class {camelcase|capitalize|colons}",
+      "end"
+    ],
+    "test": [
+        "test/services/{}_test.rb"
+    ]
+  },
+  "app/values/*.rb": {
+    "command": "value",
+    "template": [
+      "class {camelcase|capitalize|colons}",
+      "end"
+    ],
+    "test": [
+        "test/values/{}_test.rb"
+    ]
+  },
+  "app/presentations/*.rb": {
+    "command": "presentation",
+    "template": [
+      "class {camelcase|capitalize|colons}",
+      "end"
+    ],
+    "test": [
+        "test/presentations/{}_test.rb"
+    ]
+  }
+}

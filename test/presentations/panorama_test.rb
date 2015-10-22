@@ -1,5 +1,4 @@
 require 'test_helper'
-require 'panorama'
 
 class PanoramaTest < ActiveSupport::TestCase
   test 'build the table' do

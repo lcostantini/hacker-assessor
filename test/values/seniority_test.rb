@@ -1,5 +1,4 @@
 require 'test_helper'
-require 'seniority'
 
 class SeniorityTest < ActiveSupport::TestCase
 

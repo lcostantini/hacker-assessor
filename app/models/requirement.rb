@@ -1,5 +1,3 @@
-require 'experience_level'
-
 class Requirement < ActiveRecord::Base
   belongs_to :career
   belongs_to :skill
