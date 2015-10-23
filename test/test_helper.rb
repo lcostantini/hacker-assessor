@@ -1,3 +1,9 @@
+if ENV['CODECLIMATE_REPO_TOKEN'] &&
+   ENV['CI_BRANCH'] == 'master'
+  require "codeclimate-test-reporter"
+  CodeClimate::TestReporter.start
+end
+
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
