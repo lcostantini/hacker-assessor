@@ -46,6 +46,7 @@ end
 group :test do
   gem 'capybara', '~> 2.5'
   gem 'launchy'
+  gem "codeclimate-test-reporter", require: false
 end
 
 group :development do

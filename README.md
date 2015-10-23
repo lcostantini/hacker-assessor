@@ -1,5 +1,6 @@
 [![CodeClimate](https://img.shields.io/codeclimate/github/Altoros/hacker-assessor.svg)](https://codeclimate.com/github/Altoros/hacker-assessor)
 [![BuildStatus](https://img.shields.io/codeship/0b7b7050-4291-0133-fbf8-7680bc2f6412/master.svg)](https://codeship.com/projects/103764)
+[![TestCoverage](https://img.shields.io/codeclimate/coverage/github/Altoros/hacker-assessor.svg)](https://codeclimate.com/github/Altoros/hacker-assessor/coverage)
 [![License: AGPL-3.0+](https://img.shields.io/badge/license-AGPL--3.0+-643464.svg)](https://www.gnu.org/licenses/agpl)
 
 The ultimate Hacker Assessor
