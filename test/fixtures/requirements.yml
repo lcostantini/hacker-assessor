@@ -12,6 +12,12 @@ senior_js_tdd:
   career: js
   skill: tdd
 
+senior_js_ruby:
+  level: 1
+  seniority: 3
+  career: js
+  skill: ruby
+
 semisenior_js_js:
   level: 3
   seniority: 2

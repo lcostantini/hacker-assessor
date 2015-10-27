@@ -2,6 +2,30 @@
 <p>For your career of <strong><%= current_hacker.career.name %></strong> this is your path
 <h1><%= current_hacker.seniority %> => <%= current_hacker.seniority.next %></h1>
 
-<ul class="requirements">
-  <%= render current_hacker.missing_requirements_for_next_seniority %>
+<table class="dashboard">
+  <thead>
+    <tr>
+      <th>Skill</th>
+      <th>Current</th>
+      <th>Required</th>
+      <th>Claim</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% current_hacker.missing_requirements_for_next_seniority.each do |requirement| %>
+      <% acquirement = current_hacker.acquirements.find_by(skill: requirement.skill) %>
+      <tr class="<%= assign_class requirement, acquirement %>">
+        <td><%= requirement.skill.name %></td>
+        <td><%= acquirement.try(:level) %></td>
+        <td><%= requirement.level %></td>
+        <td><%= button_to 'claim', acquirements_path(acquirement: {
+          hacker_id: current_hacker.id,
+          skill_id: requirement.skill.id,
+          level: requirement.level.to_i }) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 </ul>

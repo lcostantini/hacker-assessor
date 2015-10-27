@@ -7,3 +7,7 @@ tdd:
 javascript:
   name: $LABEL
   description: Cool Description
+
+ruby:
+  name: $LABEL
+  description: A better programming language
