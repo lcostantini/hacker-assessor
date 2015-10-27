@@ -3,8 +3,10 @@
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Email</th>
+      <th>Hacker Name</th>
+      <th>Hacker Email</th>
+      <th>Career</th>
+      <th>Seniority</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,6 +16,8 @@
       <tr>
         <td><%= hacker.name %></td>
         <td><%= hacker.email %></td>
+        <td><%= hacker.career.name %></td>
+        <td><%= hacker.seniority.to_s %></td>
         <td><%= link_to 'Show', hacker %></td>
         <td><%= link_to 'Edit', edit_hacker_path(hacker) %></td>
         <td><%= link_to 'Destroy', hacker, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -7,14 +7,22 @@
     <%= content_tag :div, msg, class: name %>
   <% end %>
 
-  <% if current_hacker %>
-    <%= link_to current_hacker_gravatar + 'LOGOUT',
-                signout_path, method: :delete, class: 'button' %>
-    <%= link_to 'Acquirements', acquirements_path, class: 'button' %>
-    <%= link_to 'Skills', skills_path, class: 'button' %>
+  <% case current_role %>
+  <% when 'admin' %>
     <%= link_to 'Careers', careers_path, class: 'button' %>
     <%= link_to 'Invite', new_hacker_path, class: 'button' %>
-  <% else %>
+    <%= link_to 'Skills', skills_path, class: 'button' %>
+    <%= link_to current_hacker_gravatar + 'LOGOUT',
+                signout_path, method: :delete, class: 'button' %>
+
+  <% when 'hacker' %>
+    <%= link_to current_hacker.career.name,
+                panorama_career_path(current_hacker.career),
+                class: 'button' %>
+    <%= link_to current_hacker_gravatar + 'LOGOUT',
+                signout_path, method: :delete, class: 'button' %>
+
+  <% when 'guest' %>
     <%= form_tag login_path do |f| %>
       <%= text_field_tag :email, nil, placeholder: 'Email' %>
       <%= password_field_tag :password, nil, placeholder: 'Password' %>

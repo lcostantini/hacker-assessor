@@ -8,6 +8,7 @@
       <th>Skill</th>
       <th>Current</th>
       <th>Required</th>
+      <th>Claim</th>
     </tr>
   </thead>
 
@@ -18,6 +19,11 @@
         <td><%= requirement.skill.name %></td>
         <td><%= acquirement.try(:level) %></td>
         <td><%= requirement.level %></td>
+        <td><%= button_to 'claim', acquirements_path(acquirement: {
+          hacker_id: current_hacker.id,
+          skill_id: requirement.skill.id,
+          level: requirement.level.to_i }) %>
+        </td>
       </tr>
     <% end %>
   </tbody>
