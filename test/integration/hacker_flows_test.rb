@@ -9,8 +9,15 @@ class HackerFlowsTest < ActionDispatch::IntegrationTest
       assert has_content? 'played'
       assert has_content? 'tried'
     end
+  end
 
-    click_link 'LOGOUT'
+  test "admin see the list of hackers" do
+    login :admin
+
+    within 'tbody tr', text: 'rodri@altoros.com' do
+      assert has_content? 'js'
+      assert has_content? 'Junior+'
+    end
   end
 
   def login hacker
