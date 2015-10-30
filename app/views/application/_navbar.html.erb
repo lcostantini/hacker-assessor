@@ -8,12 +8,13 @@
   <% end %>
 
   <% if current_hacker %>
-    <%= link_to current_hacker_gravatar + 'LOGOUT',
-                signout_path, method: :delete, class: 'button' %>
     <%= link_to 'Acquirements', acquirements_path, class: 'button' %>
-    <%= link_to 'Skills', skills_path, class: 'button' %>
     <%= link_to 'Careers', careers_path, class: 'button' %>
     <%= link_to 'Invite', new_hacker_path, class: 'button' %>
+    <%= link_to 'Hackers List', hackers_path, class: 'button' %>
+    <%= link_to 'Skills', skills_path, class: 'button' %>
+    <%= link_to current_hacker_gravatar + 'Logout',
+                signout_path, method: :delete, class: 'button' %>
   <% else %>
     <%= form_tag login_path do |f| %>
       <%= text_field_tag :email, nil, placeholder: 'Email' %>
