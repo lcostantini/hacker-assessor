@@ -19,6 +19,10 @@ class Experience
     "#<Experience: skill=#{ skill.name } level=#{ level }>"
   end
 
+  def next
+    self.class.new skill_id, level_id + 1
+  end
+
   private
 
   def skill= id_or_model

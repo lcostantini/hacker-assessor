@@ -15,7 +15,7 @@ class Panorama
     levels = Array.new(Seniority::NAMES.size)
     requirements.each do |r|
       range = r.seniority.to_i..(Seniority::NAMES.size-1)
-      levels.fill(ExperienceLevel::NAMES[r.level.to_i], range)
+      levels.fill(r.experience.level, range)
     end
     levels
   end

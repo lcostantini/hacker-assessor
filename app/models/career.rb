@@ -9,7 +9,7 @@ class Career < ActiveRecord::Base
   end
 
   def missing_requirements acquirements
-    @missing_requirements ||= requirements.reject do |requirement|
+    requirements.reject do |requirement|
       acquirements.any? do |acquirement|
         requirement.skill_id == acquirement.skill_id && acquirement.level >= requirement.level
       end

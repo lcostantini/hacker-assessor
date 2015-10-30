@@ -14,11 +14,11 @@
 
   <tbody>
     <% current_hacker.missing_requirements_for_next_seniority.each do |requirement| %>
-      <% acquirement = current_hacker.acquirements.find_by(skill: requirement.skill) %>
-      <tr class="<%= assign_class requirement, acquirement %>">
+      <% current_experience = current_hacker.experience(requirement.skill) %>
+      <tr class="<%= assign_class requirement.experience, current_experience %>">
         <td><%= requirement.skill.name %></td>
-        <td><%= acquirement.try(:level) %></td>
-        <td><%= requirement.level %></td>
+        <td><%= current_experience.level %></td>
+        <td><%= requirement.experience.level %></td>
         <td><%= button_to 'claim', acquirements_path(acquirement: {
           hacker_id: current_hacker.id,
           skill_id: requirement.skill.id,
