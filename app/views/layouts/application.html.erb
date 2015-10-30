@@ -11,19 +11,22 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 </head>
 <body>
-
-<section>
-  <%= render 'navbar' %>
-  <main>
-    <%= yield %>
-    <footer>
-      Made with mate in Santa Fe, Argentina.
-      &copy; 2015 Altoros.
-      Under <a href="https://www.gnu.org/licenses/agpl">AGPL</a>.
-      Get the <a href="https://github.com/Altoros/hacker-assessor">source</a>
-    </footer>
-  </main>
-</section>
-
+  <section>
+    <%= render 'navbar' %>
+    <main>
+      <section>
+        <% flash.each do |name, msg| %>
+          <%= content_tag :div, msg, class: name %>
+        <% end %>
+        <%= yield %>
+      </section>
+      <footer>
+        Made with mate in Santa Fe, Argentina.
+        &copy; 2015 Altoros.
+        Under <a href="https://www.gnu.org/licenses/agpl">AGPL</a>.
+        Get the <a href="https://github.com/Altoros/hacker-assessor">source</a>
+      </footer>
+    </main>
+  </section>
 </body>
 </html>
