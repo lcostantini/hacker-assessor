@@ -21,7 +21,7 @@ class HackerFlowsTest < ActionDispatch::IntegrationTest
     visit root_path
     fill_in :email, with: hackers(hacker).email
     fill_in :password, with: hackers(hacker).name
-    click_button 'Sign in'
+    click_button 'SIGN IN'
     assert page.has_content? "Successfully logged in"
   end
 
