@@ -1,20 +1,28 @@
 <nav>
-  <!-- img src="assets/logo.svg" alt="Hacker Assessor" class="logo" -->
-
-  <% if current_hacker %>
-    <%= link_to 'Acquirements', acquirements_path, class: 'button' %>
-    <%= link_to 'Careers', careers_path, class: 'button' %>
-    <%= link_to 'Invite', new_hacker_path, class: 'button' %>
-    <%= link_to 'Hackers List', hackers_path, class: 'button' %>
-    <%= link_to 'Skills', skills_path, class: 'button' %>
-    <%= link_to current_hacker_gravatar + 'Logout',
-                signout_path, method: :delete, class: 'button' %>
-  <% else %>
-    <%= form_tag login_path do |f| %>
-      <%= text_field_tag :email, nil, placeholder: 'Email' %>
-      <%= password_field_tag :password, nil, placeholder: 'Password' %>
-      <%= submit_tag 'Sign in' %>
-      <a href="#">Forgot your password?</a>
+  <div class="logo">
+    <%= link_to root_path do %>
+      <span class="logo--hacker">HACKER</span>
+      <span class="logo--assessor">ASSESSOR</span>
     <% end %>
+  </div>
+  <% if current_hacker %>
+    <ul>
+      <li><%= link_to current_hacker_gravatar %></li>
+      <li><%= link_to 'ACQUIREMENTS', acquirements_path %></li>
+      <li><%= link_to 'CAREERS', careers_path %></li>
+      <li><%= link_to 'INVITE', new_hacker_path %></li>
+      <li><%= link_to 'HACKERS LIST', hackers_path %></li>
+      <li><%= link_to 'SKILLS', skills_path %></li>
+      <li><%= link_to 'LOGOUT',signout_path, method: :delete %></li>
+    </ul>
+  <% else %>
+    <div class="form--login">
+      <%= form_tag login_path do |f| %>
+        <%= text_field_tag :email, nil, placeholder: 'email' %>
+        <%= password_field_tag :password, nil, placeholder: 'password' %>
+        <a href="#">Forgot your password?</a>
+        <%= submit_tag 'SIGN IN' %>
+      <% end %>
+    </div>
   <% end %>
 </nav>

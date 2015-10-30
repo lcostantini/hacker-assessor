@@ -71,8 +71,21 @@ nav {
   height: inherit;
   overflow: auto;
 
-  a.button {
-    @include button();
+  @include media(1024px) {
+    @include span-columns(3, 'block-collapse');
+  }
+
+  @include media(1900px) {
+    @include span-columns(2, 'block-collapse');
+  }
+
+  ul {
+    margin: 20px 0 0 0;
+    padding: 0;
+
+    a {
+      @include button();
+    }
 
     .avatar {
       height: $button-height + 2*$button-padding;
