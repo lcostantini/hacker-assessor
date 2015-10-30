@@ -11,6 +11,16 @@ class HackerFlowsTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "hackers find somenthing fun to do" do
+    login :jorge
+    within 'tbody tr', text: 'tdd' do
+      assert has_content? 'played'
+      assert has_content? 'tried'
+    end
+
+    click_button 'have fun'
+  end
+
   test "admin see the list of hackers" do
     login :admin
 
