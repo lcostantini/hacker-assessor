@@ -21,7 +21,7 @@ class HackerFlowsTest < ActionDispatch::IntegrationTest
   end
 
   test "jorge wants to see other hacker dashboard" do
-    click_link 'Hackers List'
+    click_link 'HACKERS LIST'
     click_link 'rodrigo'
 
     assert has_content? 'rodrigo'
@@ -35,7 +35,7 @@ class HackerFlowsTest < ActionDispatch::IntegrationTest
     visit root_path
     fill_in :email, with: hackers(hacker).email
     fill_in :password, with: hackers(hacker).name
-    click_button 'Sign in'
+    click_button 'SIGN IN'
     assert page.has_content? "Successfully logged in"
   end
 

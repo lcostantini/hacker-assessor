@@ -24,83 +24,132 @@ $button-padding: 8px;
 $button-height: 16px;
 $button-outter-shadow: #4B4B4B;
 $text-input-background: #6B6B6B;
-$text-input-placeholder-color: #7E7E7E;
+$text-input-placeholder-color: #8F8F8F;
 $text-input-inner-shadow: #646464;
-$link-color: #8F8F8F;
+$link-color: #949292;
 $text-color: $link-color;
 
 body {
   font-family: 'Share Tech Mono', sans-serif;
   height: 100vh;
-}
 
-@mixin button() {
-  display: block;
-  background: $button-background;
-  border-radius: 2px;
-  border-width: 0;
-  font-size: 21px;
-  color: $button-color;
-  line-height: $button-height;
-  padding: $button-padding;
-  margin: 10px 2px;
-  text-decoration: none;
-  @include transition( all 0.1s );
-  @include transition( box-shadow 0.3s );
-
-  &:hover {
-    color: lighten($button-color, 20);
-    background-color: lighten($button-background, 20);
-    box-shadow: 4px 4px 2px black;
+  > section {
+    @include outer-container(100%);
+    height: 100%;
   }
 }
 
-section {
-  @include outer-container(100%);
-  height: 100%;
+@mixin button() {
+  width: 100%;
+  height: 40px;
+  margin: 6.5px 0;
+  display: block;
+  font-size: 21px;
+  line-height: 24px;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+a {
+  color: $link-color;
+
+  &:visited {
+    color: $link-color;
+  }
 }
 
 .logo {
-  line-height: 1em;
-}
+  $hacker: 3em;
+  $assessor: $hacker - $hacker/4;
+  $hacker-assessor: ($hacker - $assessor) * 3;
+  > a {
+    text-decoration: none;
+    line-height: $hacker-assessor;
 
-nav {
-  @include span-columns(2, 'block-collapse');
-  @include pad();
-  background: $background-dark;
-  height: inherit;
-  overflow: auto;
+    * {
+      display: block;
+    }
 
-  a.button {
-    @include button();
+    :first-child {
+      font-size: $hacker;
+    }
 
-    .avatar {
-      height: $button-height + 2*$button-padding;
-      float: right;
-      margin-left: 5px;
-      margin-top: -$button-padding;
-      margin-right: -$button-padding;
+    :last-child {
+      font-size: $assessor;
     }
   }
 }
 
-main {
-  @include span-columns(10, 'block-collapse');
+nav {
+  @include fill-parent;
   @include pad();
+
+  background: $background-dark;
+  height: inherit;
+
+  @include media(1024px) {
+    @include span-columns(3, 'block-collapse');
+  }
+
+  @include media(1900px) {
+    @include span-columns(2, 'block-collapse');
+  }
+
+  ul {
+    margin: 20px 0 0 0;
+    padding: 0;
+
+    a {
+      @include button();
+    }
+
+    a > .avatar {
+      height: $button-height + 2*$button-padding;
+    }
+  }
+}
+
+
+@mixin main-flex {
+  @include fill-parent;
+  @include display(flex);
+  @include flex-direction(column);
+  @include justify-content(streach);
+}
+
+main {
+  @include main-flex();
   background: $background-ligth;
   height: inherit;
-  overflow: auto;
 
-  position: relative;
-  footer {
-    background: $background-dark;
-    display: block;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    line-height: 2em;
-    padding: 10px 20px;
+  > section, > footer {
+    @include pad();
+  }
+
+  > section {
+    @include flex(1);
+    overflow-y: scroll;
+  }
+
+  @include media(1024px) {
+    @include span-columns(9, 'block-collapse');
+    @include main-flex();
+
+    > footer {
+      @include span-columns(12, 'block-collapse');
+    }
+  }
+
+  @include media(1900px) {
+    @include span-columns(10, 'block-collapse');
+    @include main-flex();
+
+    > footer {
+      @include span-columns(12, 'block-collapse');
+    }
   }
 }
 
@@ -108,7 +157,7 @@ input {
   width: 100%;
   height: 40px;
   padding: 10px;
-  margin: 6.5px 0;
+  margin: 8px 0;
   color: $text-color;
   display: block;
 
@@ -136,20 +185,6 @@ input {
   }
 }
 
-a {
-  font-size: 11px;
-  color: $link-color;
-  line-height: 13px;
-
-  &:visited {
-    color: $link-color;
-  }
-}
-
-.logo {
-  margin-bottom: 30px;
-}
-
 .almost-accomplished {
   background-color: #B58900;
 }
@@ -158,50 +193,21 @@ a {
   background-color: #DC322F;
 }
 
-.requirements , .careers , .acquirements {
-  @include outer-container;
-
-  li {
-    @include span-columns(3);
-    @include omega(4n);
-    background-color: $text-input-background;
-    min-height: 12em;
-    text-align: center;
-    margin-bottom: 2%;
-    border: 2px solid black;
-
-    &.almost-accomplished {
-      background-color: #B58900;
-    }
-
-    &.not-accomplished {
-      background-color: #DC322F;
-    }
-
-    &.content-center {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    a {
-      background: $button-background;
-      box-shadow: 0px 2px 0px 0px $button-outter-shadow;
-      border-radius: 2px;
-      border-width: 0;
-      font-size: 21px;
-      color: $button-color;
-      line-height: 24px;
-      padding: 8px;
-      display: inline-block;
-      margin: 2px;
-      text-decoration: none;
-    }
-  }
+table {
+  margin: 2em 0;
 }
 
-.panorama, .dashboard, th, td {
+th, td {
   border: 1px solid black;
   padding: 7px;
   margin-bottom: 20px;
+}
+
+li {
+  list-style: none;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
 }

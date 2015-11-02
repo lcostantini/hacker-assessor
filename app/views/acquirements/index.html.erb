@@ -1,5 +1,5 @@
 <h1>Listing Acquirements</h1>
-
+<%= link_to 'New Acquirement', new_acquirement_path %>
 <ul class="acquirements">
   <% @acquirements.each do |acquirement| %>
     <li>
@@ -9,8 +9,4 @@
       <%= link_to 'Destroy', acquirement, method: :delete, data: { confirm: 'Are you sure?' } %>
     </li>
   <% end %>
-
-  <li class="content-center">
-    <%= link_to 'New Acquirement', new_acquirement_path %>
-  </li>
 </ul>
