@@ -31,4 +31,13 @@ class ExperienceTest < ActiveSupport::TestCase
     assert_raise { a < b }
   end
 
+  test 'difference' do
+    assert_equal 1, exp(3).difference(exp(2))
+    assert_equal 2, exp(4) - exp(2)
+  end
+
+  def exp level=1, skill=skills(:tdd)
+    Experience.new skill, level
+  end
+
 end

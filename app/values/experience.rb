@@ -19,9 +19,11 @@ class Experience
     "#<Experience: skill=#{ skill.name } level=#{ level }>"
   end
 
-  def next
-    self.class.new skill_id, level_id + 1
+  def difference other
+    return nil unless skill == other.skill
+    level_id - other.level_id
   end
+  alias_method :-, :difference
 
   private
 

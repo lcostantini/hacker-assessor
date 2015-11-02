@@ -4,7 +4,7 @@ module ApplicationHelper
   end
 
   def assign_class requirement, acquirement
-    if acquirement.next == requirement && acquirement.level != 'none'
+    if acquirement.level != 'none' && requirement - acquirement == 1
       "almost-accomplished"
     else
       "not-accomplished"
