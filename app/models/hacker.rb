@@ -5,6 +5,8 @@ class Hacker < ActiveRecord::Base
   belongs_to :career
 
   validates :career_id, presence: true
+  validates :name, presence: true
+  validates :email, presence: true, uniqueness: true
 
   def seniority
     career.get_seniority acquirements unless id.nil?
