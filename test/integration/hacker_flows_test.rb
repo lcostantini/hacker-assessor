@@ -1,9 +1,12 @@
 require 'test_helper'
 
 class HackerFlowsTest < ActionDispatch::IntegrationTest
+  setup do
+    login :jorge
+  end
 
   test "jorge claim that he played with tdd" do
-    login :jorge
+    assert has_content? 'jorge'
 
     within 'tbody tr', text: 'tdd' do
       assert has_content? 'competent'
@@ -14,6 +17,17 @@ class HackerFlowsTest < ActionDispatch::IntegrationTest
 
     within 'tbody' do
       refute has_content? 'tdd'
+    end
+  end
+
+  test "jorge wants to see other hacker dashboard" do
+    click_link 'Hackers List'
+    click_link 'rodrigo'
+
+    assert has_content? 'rodrigo'
+
+    within 'tbody tr', text: 'tdd' do
+      assert has_content? 'beginner'
     end
   end
 

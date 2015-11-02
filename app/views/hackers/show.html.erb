@@ -1,12 +1,31 @@
-<p>
-  <strong>Name:</strong>
-  <%= @hacker.name %>
-</p>
+<h1><%= @hacker.name %></h1>
+<p>For your career of <strong><%= @hacker.career.name %></strong> this is your path
+<h1><%= @hacker.seniority %> => <%= @hacker.seniority.next %></h1>
 
-<p>
-  <strong>Email:</strong>
-  <%= @hacker.email %>
-</p>
+<table class="dashboard">
+  <thead>
+    <tr>
+      <th>Skill</th>
+      <th>Current</th>
+      <th>Required</th>
+      <th>Claim</th>
+    </tr>
+  </thead>
 
-<%= link_to 'Edit', edit_hacker_path(@hacker) %> |
-<%= link_to 'Back', hackers_path %>
+  <tbody>
+    <% @hacker.missing_requirements_for_next_seniority.each do |requirement| %>
+      <% current_experience = current_hacker.experience(requirement.skill) %>
+      <tr class="<%= assign_class requirement.experience, current_experience %>">
+        <td><%= requirement.skill.name %></td>
+        <td><%= current_experience.level %></td>
+        <td><%= requirement.experience.level %></td>
+        <td><%= button_to 'claim', acquirements_path(acquirement: {
+          hacker_id: @hacker.id,
+          skill_id: requirement.skill.id,
+          level: requirement.level.to_i }),
+          disabled: @hacker != current_hacker %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

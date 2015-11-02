@@ -34,6 +34,7 @@ end
 # Lets make tests simplier
 Hacker.find_or_create_by! email: 'test@hacker.com' do |hacker|
   hacker.password = 'password'
+  hacker.name = 'Test'
   hacker.career = career
 end if Hacker.all.empty? || Rails.env.development? || Rails.env.test?
 
