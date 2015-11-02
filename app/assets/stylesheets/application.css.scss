@@ -62,28 +62,26 @@ a {
 }
 
 .logo {
-  @include row();
   $hacker: 3em;
   $assessor: $hacker - $hacker/4;
   $hacker-assessor: ($hacker - $assessor) * 3;
   > a {
     text-decoration: none;
     line-height: $hacker-assessor;
-  }
 
-  span {
-    display: block;
-  }
+    * {
+      display: block;
+    }
 
-  .logo--hacker {
-    font-size: $hacker;
-  }
+    :first-child {
+      font-size: $hacker;
+    }
 
-  .logo--assessor {
-    font-size: $assessor;
+    :last-child {
+      font-size: $assessor;
+    }
   }
 }
-
 
 nav {
   @include fill-parent;
