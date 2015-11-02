@@ -6,7 +6,7 @@ class HackerFlowsTest < ActionDispatch::IntegrationTest
     login :jorge
 
     within 'tbody tr', text: 'tdd' do
-      assert has_content? 'played'
+      assert has_content? 'competent'
       click_on 'claim'
     end
 

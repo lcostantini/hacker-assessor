@@ -1,6 +1,6 @@
 class DefaultFormBuilder < ActionView::Helpers::FormBuilder
   def experience_level_select attribute = :level
-    select attribute, ExperienceLevel.options,
+    select attribute, Experience::LEVELS,
       selected: object.public_send(attribute).to_i
   end
 
